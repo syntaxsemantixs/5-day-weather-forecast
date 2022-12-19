@@ -21,25 +21,30 @@
 	let searchButton = $("#search-city")
 
 
-	//searchButton.click(getWeather())
-	geoLocator()
+
+	searchButton.click(function () {
+		let cityInput = $("#city-input").val();
+		console.log(cityInput)
+		geoLocator(cityInput)
+	})
 	
 	function geoLocator(city) {
-		const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=London&appid=`+APIkey
-
+		//const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
+		const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=London&appid=${APIkey}`;
+		console.log(requestUrl)
 		fetch(requestUrl)
 			.then(function (response) {
-				console.log(response)
 				return response.json();
 			})
 			.then(function (data) {
-				console.log(data);
-				
+				console.log(data[0]);
+				getWeather(data[0].lat,data[0].lon)
 			});
 	}
 
-	function getWeather() {
-		const requestUrl = `https://api.openweathermap.org/data/2.5/weather?units=imperial&lat=51.5085&lon=-0.1257&appid=` + APIkey;
+	function getWeather(lat, lon) {
+		console.log(lat, lon)
+		const requestUrl = `https://api.openweathermap.org/data/2.5/weather?units=imperial&lat=${lat}&lon=${lon}&appid=${APIkey}`;
 
 		fetch(requestUrl)
 			.then(function (response) {
