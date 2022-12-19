@@ -16,11 +16,30 @@
 
 	let cityInput = $("#city-input").val();
 
+	console.log(cityInput)
+
 	let searchButton = $("#search-city")
+
+
+	//searchButton.click(getWeather())
+	geoLocator()
 	
+	function geoLocator(city) {
+		const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=London&appid=`+APIkey
+
+		fetch(requestUrl)
+			.then(function (response) {
+				console.log(response)
+				return response.json();
+			})
+			.then(function (data) {
+				console.log(data);
+				
+			});
+	}
 
 	function getWeather() {
-		const requestUrl = "https://api.openweathermap.org/data/2.5/weather?units=imperial&lat=44.34&lon=10.99&appid=" + APIkey;
+		const requestUrl = `https://api.openweathermap.org/data/2.5/weather?units=imperial&lat=51.5085&lon=-0.1257&appid=` + APIkey;
 
 		fetch(requestUrl)
 			.then(function (response) {
@@ -34,7 +53,7 @@
 				cityHumidity.text(data.main.humidity)
 				cityWind.text(data.wind.speed)
 				getUvIndex(data.coord.lat, data.coord.lon);
-				getFiveDays("Chicago")
+				getFiveDays(cityInput)
 			});
 	}
 
@@ -95,7 +114,6 @@
 			});
 	}
 
-	searchButton.click(getWeather())
 
 	
 })(jQuery)
