@@ -25,7 +25,18 @@
 	searchButton.click(function () {
 		let cityInput = $("#city-input").val();
 		console.log(cityInput)
-		geoLocator(cityInput)
+		let cityData = geoLocator(cityInput)
+		let getCity = JSON.parse(window.localStorage.getItem("getCity")) || []
+		$("#city-list").each(function() {
+			getCity.push({cityInput, cityData})
+			if (cityInput.length >0) {
+				for (let i = 0; i < cityInput.length; i++) {
+					const element = cityData[i];
+					$("#city-list").append("<button>" + cityInput[i] + "</button>")
+					window.localStorage.setItem("getCity", JSON.stringify(cityInput))			
+				}
+			}
+		})
 	})
 	
 	function geoLocator(city) {
