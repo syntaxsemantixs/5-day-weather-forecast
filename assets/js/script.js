@@ -30,7 +30,7 @@
 	
 	function geoLocator(city) {
 		//const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
-		const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=London&appid=${APIkey}`;
+		const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
 		console.log(requestUrl)
 		fetch(requestUrl)
 			.then(function (response) {
@@ -39,6 +39,7 @@
 			.then(function (data) {
 				console.log(data[0]);
 				getWeather(data[0].lat,data[0].lon)
+				getFiveDays(city)
 			});
 	}
 
@@ -54,11 +55,10 @@
 			.then(function (data) {
 				console.log(data);
 				cityName.text(data.name)
-				cityTemp.text(data.main.temp)
-				cityHumidity.text(data.main.humidity)
-				cityWind.text(data.wind.speed)
+				cityTemp.text(data.main.temp + " " + "° F" )
+				cityHumidity.text(data.main.humidity + " " + "Humidity")
+				cityWind.text(data.wind.speed + " " + "MPH")
 				getUvIndex(data.coord.lat, data.coord.lon);
-				getFiveDays(cityInput)
 			});
 	}
 
@@ -73,7 +73,7 @@
 			})
 			.then(function (data) {
 				console.log(data);
-				cityUV.text(data.value)
+				cityUV.text(data.value + " " + "UV Index")
 			});
 
 
