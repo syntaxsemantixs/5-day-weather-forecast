@@ -24,17 +24,19 @@
 
 	searchButton.click(function () {
 		let cityInput = $("#city-input").val();
+		let cityArray = []
 		console.log(cityInput)
-		let cityData = geoLocator(cityInput)
-		let getCity = JSON.parse(window.localStorage.getItem("getCity")) || []
+		let cityData = getWeather()
+		let getCity = window.localStorage.getItem("getCity")
+		//cityArray.push({cityInput, cityData})
+		cityArray.push(cityData)
+		console.log(cityArray)
+		console.log(getCity)
+		localStorage.setItem("getCity", cityArray)	
 		$("#city-list").each(function() {
-			getCity.push({cityInput, cityData})
-			if (cityInput.length >0) {
-				for (let i = 0; i < cityInput.length; i++) {
-					const element = cityData[i];
-					$("#city-list").append("<button>" + cityInput[i] + "</button>")
-					window.localStorage.setItem("getCity", JSON.stringify(cityInput))			
-				}
+			cityArray.push({cityInput, cityData})
+			if (cityInput){
+				$("#city-list").append("<button>" + cityInput + "</button>")
 			}
 		})
 	})
