@@ -1,6 +1,10 @@
 # 5-day-weather-forecast
 An API to provide the 5-day weather forecast
 
+## Deployed Page
+
+[5 Day Weather Forecast](https://syntaxsemantixs.github.io/5-day-weather-forecast/)
+
 ## Description
 
 The motivation behind this API is to pull the current and next 5 day weather forecast. This project helps to learn to use the weather API to access the data from a server and bring it back into the webpage. This project took a lot of getting used to getting data from a server. Being able to access the data and them placing it onto a page with several functions while not breaking the code.
