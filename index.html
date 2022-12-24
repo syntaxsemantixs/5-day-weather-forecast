@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Dashboard</title>
+    <title>5 Day Weather Forecast</title>
 
     <script
       src="https://kit.fontawesome.com/9d317aec20.js"
@@ -17,12 +17,12 @@
   </head>
   <body>
     <header>
-      <h1>Weather Dashboard</h1>
+      <h1>5 Day Weather Forecast</h1>
     </header>
     <!-- Sidebar for city search -->
     <div class="row container-fluid">
       <div class="col-3 sidebar">
-        <h3>Search for a City:</h3>
+        <h3 class="sidebar-title">Search for a City:</h3>
         <div class="input-group mb-3">
           <input
             type="text"
@@ -47,6 +47,8 @@
       <div class="col" id="city-info">
         <div class="card mb-3">
           <div class="card-body">
+            <img class="icon">
+            <div id="weather-icon"></div>
             <h5 class="card-title"></h5>
             <p class="card-text" id="temperature"></p>
             <p class="card-text" id="humidity"></p>

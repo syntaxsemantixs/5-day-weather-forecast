@@ -21,26 +21,33 @@
 	let searchButton = $("#search-city")
 
 
-
 	searchButton.click(function () {
 		let cityInput = $("#city-input").val();
-		let cityArray = []
-		console.log(cityInput)
-		let cityData = getWeather()
-		let getCity = window.localStorage.getItem("getCity")
-		//cityArray.push({cityInput, cityData})
-		cityArray.push(cityData)
+		let cityArray = [window.localStorage.getItem("getCity")] || []
 		console.log(cityArray)
-		console.log(getCity)
-		localStorage.setItem("getCity", cityArray)	
-		$("#city-list").each(function() {
-			cityArray.push({cityInput, cityData})
-			if (cityInput){
-				$("#city-list").append("<button>" + cityInput + "</button>")
+		let cityData = geoLocator(cityInput)
+		// let getCity = 
+		//cityArray.push({cityInput, cityData})
+		cityArray.push(cityInput)
+		console.log(cityArray)
+		// console.log(getCity)
+
+		localStorage.setItem("getCity", cityArray)
+		$("#city-list").each(function () {
+			// cityArray.push({ cityInput, cityData })
+			if (cityInput) {
+
+				var cityButton = document.createElement("button")
+				cityButton.textContent = cityInput
+				cityButton.addEventListener("click", function () {
+					console.log("clicked")
+					geoLocator(cityInput)
+				})
+				$("#city-list").append(cityButton)
 			}
 		})
 	})
-	
+
 	function geoLocator(city) {
 		//const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
 		const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
@@ -51,7 +58,7 @@
 			})
 			.then(function (data) {
 				console.log(data[0]);
-				getWeather(data[0].lat,data[0].lon)
+				getWeather(data[0].lat, data[0].lon)
 				getFiveDays(city)
 			});
 	}
@@ -68,7 +75,7 @@
 			.then(function (data) {
 				console.log(data);
 				cityName.text(data.name)
-				cityTemp.text(data.main.temp + " " + "° F" )
+				cityTemp.text(data.main.temp + " " + "° F")
 				cityHumidity.text(data.main.humidity + " " + "Humidity")
 				cityWind.text(data.wind.speed + " " + "MPH")
 				getUvIndex(data.coord.lat, data.coord.lon);
@@ -102,15 +109,18 @@
 			})
 			.then(function (data) {
 				console.log(data);
+				fiveDaysDiv.empty()
+				let iconDiv = $("#weather-icon")
 				let dataRow = $('<div>');
 				let title = $('<h3>').addClass('text-light text-center');
 				dataRow.addClass('row my-3 justify-content-between');
-
 				for (let i = 0; i < data.list.length; i++) {
 					let dataCol = $('<div>');
 					dataCol.addClass(
 						'col-md-2 five-days mx-2 rounded five-days-text p-3 text-center border'
 					);
+					iconDiv.html(`<img src="http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png">`)
+					console.log(iconDiv)
 					let icon = `<img src="http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png">`;
 					if (data.list[i].dt_txt.includes('18:00:00')) {
 						let date = data.list[i].dt_txt;
@@ -133,5 +143,5 @@
 	}
 
 
-	
+
 })(jQuery)
