@@ -119,9 +119,9 @@
 					dataCol.addClass(
 						'col-md-2 five-days mx-2 rounded five-days-text p-3 text-center border'
 					);
-					iconDiv.html(`<img src="http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png">`)
+					iconDiv.html(`<img src="https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png">`)
 					console.log(iconDiv)
-					let icon = `<img src="http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png">`;
+					let icon = `<img src="https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png">`;
 					if (data.list[i].dt_txt.includes('18:00:00')) {
 						let date = data.list[i].dt_txt;
 						dataCol.html(`
