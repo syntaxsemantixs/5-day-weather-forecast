@@ -7,8 +7,12 @@ header {
 	text-align: center;
 	color: white;
 	padding: 20px;
-	background-color: lightblue;
-    border: solid black;
+	background-color: darkblue;
+    border: solid lightblue;
+}
+
+.sidebar-title{
+	color: white;
 }
 
 #city-info {
@@ -16,11 +20,16 @@ header {
 }
 
 .sidebar {
-	background-color: lightblue;
+	background-color: darkblue;
 	padding: 10px;
-    border: solid lightseagreen;
+    border: solid lightblue;
 }
 
 .daycard {
     margin: 10px;
+}
+
+#weather-icon {
+	border: solid black;
+	margin-bottom: 50px;
 }
