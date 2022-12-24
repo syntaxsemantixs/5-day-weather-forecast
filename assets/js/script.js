@@ -50,7 +50,7 @@
 
 	function geoLocator(city) {
 		//const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
-		const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
+		const requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
 		console.log(requestUrl)
 		fetch(requestUrl)
 			.then(function (response) {
@@ -85,7 +85,7 @@
 
 	function getUvIndex(lat, lon) {
 
-		const requestUrl = `http://api.openweathermap.org/data/2.5/uvi?&lat=${lat}&lon=${lon}&appid=${APIkey}`
+		const requestUrl = `https://api.openweathermap.org/data/2.5/uvi?&lat=${lat}&lon=${lon}&appid=${APIkey}`
 
 		fetch(requestUrl)
 			.then(function (response) {
@@ -119,9 +119,9 @@
 					dataCol.addClass(
 						'col-md-2 five-days mx-2 rounded five-days-text p-3 text-center border'
 					);
-					iconDiv.html(`<img src="http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png">`)
+					iconDiv.html(`<img src="https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png">`)
 					console.log(iconDiv)
-					let icon = `<img src="http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png">`;
+					let icon = `<img src="https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png">`;
 					if (data.list[i].dt_txt.includes('18:00:00')) {
 						let date = data.list[i].dt_txt;
 						dataCol.html(`
