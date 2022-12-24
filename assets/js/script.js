@@ -50,7 +50,7 @@
 
 	function geoLocator(city) {
 		//const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
-		const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
+		const requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
 		console.log(requestUrl)
 		fetch(requestUrl)
 			.then(function (response) {
@@ -85,7 +85,7 @@
 
 	function getUvIndex(lat, lon) {
 
-		const requestUrl = `http://api.openweathermap.org/data/2.5/uvi?&lat=${lat}&lon=${lon}&appid=${APIkey}`
+		const requestUrl = `https://api.openweathermap.org/data/2.5/uvi?&lat=${lat}&lon=${lon}&appid=${APIkey}`
 
 		fetch(requestUrl)
 			.then(function (response) {
