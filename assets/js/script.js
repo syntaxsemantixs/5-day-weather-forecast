@@ -18,12 +18,14 @@
 
 	console.log(cityInput)
 
+	let storageItem = JSON.parse(window.localStorage.getItem("getCity"))
+
 	let searchButton = $("#search-city")
 
 
 	searchButton.click(function () {
 		let cityInput = $("#city-input").val();
-		let cityArray = [window.localStorage.getItem("getCity")] || []
+		let cityArray = JSON.parse(window.localStorage.getItem("getCity")) || []
 		console.log(cityArray)
 		let cityData = geoLocator(cityInput)
 		// let getCity = 
@@ -32,21 +34,58 @@
 		console.log(cityArray)
 		// console.log(getCity)
 
-		localStorage.setItem("getCity", cityArray)
-		$("#city-list").each(function () {
-			// cityArray.push({ cityInput, cityData })
-			if (cityInput) {
+		localStorage.setItem("getCity", JSON.stringify(cityArray))
+		// $("#city-list").each(function () {
+		// 	// cityArray.push({ cityInput, cityData })
+		// 	if (cityInput) {
 
-				var cityButton = document.createElement("button")
-				cityButton.textContent = cityInput
-				cityButton.addEventListener("click", function () {
-					console.log("clicked")
-					geoLocator(cityInput)
-				})
-				$("#city-list").append(cityButton)
-			}
-		})
+		// 		var cityButton = document.createElement("button")
+		// 		cityButton.textContent = cityInput
+		// 		cityButton.addEventListener("click", function () {
+		// 			console.log("clicked")
+		// 			geoLocator(cityInput)
+		// 		})
+		// 		$("#city-list").append(cityButton)
+		// 	}
+		// })
 	})
+	function displayRecent (array) {
+		var listGroup = $("#city-list")
+		for (const element of array) {
+			var listGroupItem = $("<li>")
+			var linkItem = $("<a>")
+			listGroupItem.addClass("list-group-item history-city")
+			linkItem.attr("href", "#")
+			linkItem.text(element)
+			listGroup.append(listGroupItem)
+			listGroupItem.append(linkItem)
+		}
+	}
+//access dynamic element through the body
+
+	$("body").on("click", ".history-city", function () {
+		console.log($(this).text())
+		var info = $(this).text()
+		geoLocator(info)
+		
+	})
+
+
+	displayRecent(storageItem)
+
+	// $("#city-list").each(function () {
+	// 	// cityArray.push({ cityInput, cityData })
+	// 	//if (cityInput) {
+
+	// 		var cityButton = document.createElement("button")
+	// 		cityButton.textContent = cityInput
+	// 		cityButton.addEventListener("click", function () {
+	// 			console.log("clicked")
+	// 			geoLocator(cityInput)
+	// 		})
+	// 		$("#city-list").append(cityButton)
+	// 	//}
+	// })
 
 	function geoLocator(city) {
 		//const requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
